@@ -1,0 +1,55 @@
+{
+  "app": {
+    "signingConfigs": [
+      {
+        "name": "default",
+        "type": "HarmonyOS",
+        "material": {
+          "certpath": "C:\\Users\\Administrator\\.ohos\\config\\default_ChatAIApplication_kRLNaSTecLKP7r6ddICa8TB_RnNlHcG7bs_dsA0yoCI=.cer",
+          "storePassword": "00000019A29D07F9ADA1A132FF68A0565F1364240C9D4F5CC9F2044E27B1C3D241D916C012FD5A0D41",
+          "keyAlias": "debugKey",
+          "keyPassword": "00000019FCE6AD438589399DE22908E3CCE99CEA15B3D49D5E100D492F6F3B8E1FDF3D3EDFE360496E",
+          "profile": "C:\\Users\\Administrator\\.ohos\\config\\default_ChatAIApplication_kRLNaSTecLKP7r6ddICa8TB_RnNlHcG7bs_dsA0yoCI=.p7b",
+          "signAlg": "SHA256withECDSA",
+          "storeFile": "C:\\Users\\Administrator\\.ohos\\config\\default_ChatAIApplication_kRLNaSTecLKP7r6ddICa8TB_RnNlHcG7bs_dsA0yoCI=.p12"
+        }
+      }
+    ],
+    "products": [
+      {
+        "name": "default",
+        "signingConfig": "default",
+        "compatibleSdkVersion": "5.0.0(12)",
+        "runtimeOS": "HarmonyOS",
+        "buildOption": {
+          "strictMode": {
+            "caseSensitiveCheck": true,
+            "useNormalizedOHMUrl": true
+          }
+        }
+      }
+    ],
+    "buildModeSet": [
+      {
+        "name": "debug",
+      },
+      {
+        "name": "release"
+      }
+    ]
+  },
+  "modules": [
+    {
+      "name": "entry",
+      "srcPath": "./entry",
+      "targets": [
+        {
+          "name": "default",
+          "applyToProducts": [
+            "default"
+          ]
+        }
+      ]
+    }
+  ]
+}
