@@ -15,6 +15,9 @@ export  class  BaseViewModel{
     return await httpUtils.post<T>(url,extraData)
   }
 
+  async get<T extends BaseResponse<object>>(url:string,username:string){
+    return await httpUtils.get<T>(url,username)
+  }
 
   async postXF<T  extends XFResultBean>(url:string,extraData?:object){
     return await httpXfUtils.post<T>(url,extraData)

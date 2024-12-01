@@ -13,8 +13,8 @@ import { showToast } from '../utils/ComponentUtils'
 @Component
 struct LoginPage{
 
-  @State  account: string="1980759"
-  @State  password: string="123123"
+  @State  account: string="luomingr"
+  @State  password: string="1231231"
   @State  checkBoolean:boolean=true
   @State  res :string=""
 

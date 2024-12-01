@@ -1,3 +1,4 @@
+import { HistoryPage } from "../pages/HistoryPage"
 import { MessagePage } from "../pages/MessagePage"
 import { MinePage } from "../pages/MinePage"
 
@@ -36,9 +37,11 @@ export  struct   TabComponent{
         TabContent() {
           MessagePage()
         }.tabBar(this.tabBuilder("chat", 0, $r("app.media.messages_select"), $r("app.media.messages") ))
+
         TabContent() {
-          MinePage()
+          HistoryPage()
         }.tabBar(this.tabBuilder("saved", 1, $r("app.media.archive_add"), $r("app.media.vuesax_archive_add") ))
+
       }
     }
 

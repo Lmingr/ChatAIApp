@@ -13,8 +13,6 @@ import { DataReceiveInfo } from '../bean/Data';
 export  class  HttpXfUtilsStream{
 
 
-
-
   private  async  createHttpRequestOptions(extraData?:object) {
     let options: http.HttpRequestOptions = {
       method: http.RequestMethod.POST,
