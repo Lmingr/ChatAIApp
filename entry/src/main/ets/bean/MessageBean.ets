@@ -1,7 +1,6 @@
 
 
 export  class  MessageBean{
-  topic:string=""
+  role:string=""
   content:string=""
-  messageTime:string=""
 }

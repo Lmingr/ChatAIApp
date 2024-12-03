@@ -18,13 +18,7 @@ export class LoginViewModel extends BaseViewModel{
     if(response && response.state=='200'){
       Logger.info("LoginViewModel -》》登录成功1111！！！"+response.state)
        Logger.info("res 返回数据 phone-》"+response.data?.phone)
-       Logger.info("res 返回数据 message-》"+response.data?.message[0].content)
-      let  list=response.data?.message
-      for (let index = 0; index < list.length; index++) {
-        Logger.info("res 返回数据 list-》"+list[index].topic)
-        Logger.info("res 返回数据 list-》"+list[index].content)
-      }
-        callback(true)
+      callback(true)
       }else{
         showToast("登录失败")
         callback(false)

@@ -1,5 +1,8 @@
 import { router } from "@kit.ArkUI"
 import { MessageBean } from "../bean/MessageBean"
+import { UserMessage } from "../bean/UserMessage"
+import { showToast } from "../utils/ComponentUtils"
+import { Logger } from "../utils/Logger"
 import { MessageComponent } from "../view/MesssageComponent"
 import { historyViewModel } from "../viewModel/HistoryViewModel"
 
@@ -13,11 +16,11 @@ export  struct HistoryPage{
   private scroller: Scroller = new Scroller()
 
   @State
-  messages:MessageBean[]=[]
+  messageList:UserMessage[]=[]
 
   aboutToAppear(){
-     historyViewModel.found("luomingr").then((res)=>{
-       this.messages=res
+     historyViewModel.foundMessageList("luomingr").then((res)=>{
+        this.messageList=res
      })
   }
 
@@ -50,15 +53,23 @@ export  struct HistoryPage{
       .width(`100%`)
 
       List({space:20,scroller:this.scroller}){
-        ForEach(this.messages, (item:MessageBean)=>{
+        ForEach(this.messageList, (item:UserMessage)=>{
           ListItem(){
-            MessageComponent({messageBean:item})
+            MessageComponent({userMessage:item})
           }
+          .onClick(()=>{
+            showToast("点击了"+item.mid)
+          })
         })
       }
       .scrollSnapAlign(ScrollSnapAlign.END)
       .layoutWeight(1)
-      .padding({top:20,bottom:10})
+      .padding({
+        left:20,
+        right:20,
+        top:20,
+        bottom:10
+      })
 
     }
     .padding({top:this.statusBar})

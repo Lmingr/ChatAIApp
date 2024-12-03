@@ -1,39 +1,42 @@
 import { MessageBean } from "../bean/MessageBean"
+import { UserMessage } from "../bean/UserMessage"
 
 
 @Preview
 @Component
 export struct  MessageComponent{
 
-
-  @Prop messageBean:MessageBean
+   @Prop userMessage:UserMessage
 
   build() {
 
     Stack(){
       Column(){
-        Text(this.messageBean.topic)
+        Text(this.userMessage.messageTopic)
           .fontSize(18)
           .maxLines(1)
+          .margin({
+            right:20
+          })
           .textOverflow({overflow:TextOverflow.Ellipsis})
-        Text(this.messageBean.content)
+        Text(this.userMessage.messageContent)
           .fontColor($r("app.color.content_Color"))
           .fontSize(14)
           .maxLines(2)
           .textOverflow({overflow:TextOverflow.Ellipsis})
           .margin({
-            top:5
+            right:40
           })
-        Text(`15 May 2023`)
+        Text(this.userMessage.messageDate.toString())
           .fontSize(12)
           .textAlign(TextAlign.End)
           .width(`100%`)
           .fontColor($r("app.color.date_Color"))
           .margin({
-            top:7,
             right:3
           })
       }
+      .justifyContent(FlexAlign.SpaceBetween)
       .alignItems(HorizontalAlign.Start)
       .width(`100%`)
       .height(`100%`)
@@ -42,6 +45,7 @@ export struct  MessageComponent{
         .height(20)
 
     }
+    .alignContent(Alignment.End)
     .border({
       radius:15
     })
@@ -52,8 +56,7 @@ export struct  MessageComponent{
       right:20,
       bottom:8
     })
-    .height(90)
-    .alignContent(Alignment.End)
+    .height(95)
   }
 
 }

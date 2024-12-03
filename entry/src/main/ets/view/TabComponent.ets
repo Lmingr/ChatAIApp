@@ -33,7 +33,7 @@ export  struct   TabComponent{
 
   build() {
     Stack() {
-      Tabs({ barPosition: BarPosition.End, controller: this.tabsController,index:1 }) {
+      Tabs({ barPosition: BarPosition.End, controller: this.tabsController,index:0 }) {
         TabContent() {
           MessagePage()
         }.tabBar(this.tabBuilder("chat", 0, $r("app.media.messages_select"), $r("app.media.messages") ))

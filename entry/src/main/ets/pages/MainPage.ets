@@ -5,7 +5,7 @@ import { TabComponent } from '../view/TabComponent'
 @Component
 struct  MainPage{
 
-  @State currentIndex: number = 1
+  @State currentIndex: number = 0
 
   build() {
     Column(){

@@ -113,15 +113,8 @@ export class  UserInfo{
     return this._modifiedUser;
   }
 
-  private _message: MessageBean[];
 
-  public set message(value: MessageBean[]) {
-    this._message = value;
-  }
 
-  public get message(): MessageBean[] {
-    return this._message;
-  }
 
   private _createdTime: Date;
 
@@ -144,7 +137,7 @@ export class  UserInfo{
   }
 
   constructor(uid: number, username: string, password: string, salt: string, phone: string, email: string,
-    avater: string, gender: string, isDelete: number, createdUser: string, modifiedUser: string, message: MessageBean[],
+    avater: string, gender: string, isDelete: number, createdUser: string, modifiedUser: string,
     createdTime: Date, modifiedTime: Date) {
     this._uid = uid;
     this._username = username;
@@ -157,7 +150,6 @@ export class  UserInfo{
     this._isDelete = isDelete;
     this._createdUser = createdUser;
     this._modifiedUser = modifiedUser;
-    this._message = message;
     this._createdTime = createdTime;
     this._modifiedTime = modifiedTime;
   }

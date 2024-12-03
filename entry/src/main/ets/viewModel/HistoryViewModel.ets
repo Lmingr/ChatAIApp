@@ -1,24 +1,27 @@
-import { MessageBean } from "../bean/MessageBean";
-import { UserInfo } from "../bean/UserInfo";
+
+import { UserMessage } from "../bean/UserMessage";
 import { ApiPath } from "../http/ApiPath";
 import { BaseResponse } from "../http/BaseResponse";
+import { Logger } from "../utils/Logger";
 import { BaseViewModel } from "./BaseViewModel";
 
 
 export  class  HistoryViewModel extends  BaseViewModel{
 
 
-  messageBean:MessageBean[]=[]
+  userMessageBean:UserMessage[]=[]
 
-  async found(username:string):Promise<MessageBean[]>
+  async foundMessageList(username:string):Promise<UserMessage[]>
   {
-   await this.get<BaseResponse<UserInfo>>(ApiPath.found,username).then((res)=>{
+   await this.get<BaseResponse<UserMessage[]>>(ApiPath.foundList,username).then((res)=>{
+
           if(res) {
-           this.messageBean=res.data.message
+            Logger.info("res的值是多少呀222222"+res.data.length)
+            this.userMessageBean=res.data
           }
      });
 
-    return  this.messageBean;
+    return  this.userMessageBean;
   }
 }
 

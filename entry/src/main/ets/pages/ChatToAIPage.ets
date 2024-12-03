@@ -22,6 +22,11 @@ struct  ChatToAIPage{
   @State
   messageList:MessageInfoModel[]=[]
 
+  aboutToAppear(): void {
+   Logger.info(" aboutToAppear()这里是页面显示的时候")
+  }
+
+
   build() {
     Column(){
       Stack({alignContent:Alignment.BottomStart}){//开始居左
@@ -118,5 +123,8 @@ struct  ChatToAIPage{
     this.scroller.scrollEdge(Edge.Bottom)
   }
 
+  aboutToDisappear(): void {
+    Logger.info(" aboutToDisappear()这里是页面不显示的时候")
+  }
 
 }
