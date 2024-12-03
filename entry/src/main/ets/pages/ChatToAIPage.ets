@@ -5,6 +5,7 @@ import { MessageLoadingComponent } from '../view/MessageLoadingComponent'
 import { BottomComponent } from '../view/BottomComponent'
 import { Logger } from '../utils/Logger'
 import { chatMessageViewModel } from '../viewModel/ChatMessageViewModel'
+import { MessageBean } from '../bean/MessageBean'
 
 
 @Entry
@@ -19,8 +20,14 @@ struct  ChatToAIPage{
 
   @State loading:boolean=false
 
+
+  // @State
+  // messageList:MessageInfoModel[]=[]
+  //
+
   @State
-  messageList:MessageInfoModel[]=[]
+  messageList:MessageBean[]=[]
+
 
   aboutToAppear(): void {
    Logger.info(" aboutToAppear()这里是页面显示的时候")
@@ -56,9 +63,9 @@ struct  ChatToAIPage{
       .width('100%')
 
       List({space:20,scroller:this.scroller}){
-        ForEach(this.messageList, (item:MessageInfoModel)=>{
+        ForEach(this.messageList, (item:MessageBean)=>{
           ListItem(){
-            MessageComponent({messageInfo:item})
+            MessageComponent({messageBean:item})
           }
         })
         MessageLoadingComponent()
@@ -83,24 +90,20 @@ struct  ChatToAIPage{
   async  sendMessage(content:string):Promise<void>{
     //这里是每次使用者调用的时候
 
-    // let messageInfoModel=new MessageInfoModel()
-    // messageInfoModel.messageContent=content
-    // messageInfoModel.sendUser="lmr"
     // messageInfoModel.receiveUser="AI"
     // messageInfoModel.headImage=$r("app.media.touxiang_1")
     // this.messageList.push(messageInfoModel)
-    await this.messagePush(content,"lmr","AI",$r("app.media.touxiang_1"))
+    await this.messagePush("user",content)
     Logger.info(" this.loading11111111"+ this.loading)
     this.loading=true
-    this.getResponseMessage(content,"lmr")
+    this.getResponseMessage(content,"user")
   }
 
   //封装AI问答
   async   getResponseMessage(question:string,user:string){
     const  result= await chatMessageViewModel.postXf(question,user)
     this.loading=false
-
-    this.messagePush(result,"ChatAI",user,$r("app.media.vector_ai"))
+    this.messagePush("AI",result)
     // let messageInfo=new MessageInfoModel()
     // messageInfo.messageContent=result
     // messageInfo.sendUser="AI"
@@ -110,18 +113,28 @@ struct  ChatToAIPage{
 
   }
 
-
-  async messagePush(result:string,senUser:string,user:string,image:ResourceStr) :Promise<void>
-  {
-    Logger.info(" this.loading"+ this.loading)
-    let messageInfo=new MessageInfoModel()
-    messageInfo.messageContent=result
-    messageInfo.sendUser=senUser
-    messageInfo.receiveUser=user
-    messageInfo.headImage=image
-    this.messageList.push(messageInfo)
+  async  messagePush(role:string,content:string){
+    let messageBean=new MessageBean()
+    messageBean.role=role
+    messageBean.content=content;
+    this.messageList.push(messageBean)
     this.scroller.scrollEdge(Edge.Bottom)
   }
+
+
+
+  // async messagePush(result:string,senUser:string,user:string,image:ResourceStr) :Promise<void>
+  // {
+  //   Logger.info(" this.loading"+ this.loading)
+  //   let messageInfo=new MessageInfoModel()
+  //   messageInfo.messageContent=result
+  //   messageInfo.sendUser=senUser
+  //   messageInfo.receiveUser=user
+  //   messageInfo.headImage=image
+  //   this.messageList.push(messageInfo)
+  //   this.scroller.scrollEdge(Edge.Bottom)
+  // }
+
 
   aboutToDisappear(): void {
     Logger.info(" aboutToDisappear()这里是页面不显示的时候")

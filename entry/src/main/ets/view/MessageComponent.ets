@@ -1,3 +1,4 @@
+import { MessageBean } from '../bean/MessageBean'
 import { MessageInfoModel } from '../bean/MessageInfoModel'
 import { XFRequestBean } from '../bean/XFRequestBean'
 
@@ -6,11 +7,10 @@ import { XFRequestBean } from '../bean/XFRequestBean'
 struct  MessageComponent{
 
   @Prop
-  messageInfo:MessageInfoModel=new MessageInfoModel()
-
+  messageBean:MessageBean
 
   @State//是不是user发的消息
-  isOwnMessage:boolean = this.messageInfo?.sendUser=="lmr"
+  isOwnMessage:boolean = this.messageBean?.role=="user"
 
   @State answer:string=""
   @State pos:number=0
@@ -23,8 +23,8 @@ struct  MessageComponent{
     clearInterval(this.intervalID);
     setTimeout(() => {
       this.intervalID = setInterval(() => {
-        if (this.pos < this.messageInfo?.messageContent.length) {
-          this.answer = this.answer.concat(this.messageInfo?.messageContent.charAt(this.pos))
+        if (this.pos < this.messageBean?.content.length) {
+          this.answer = this.answer.concat(this.messageBean?.content.charAt(this.pos))
           this.pos += 1;
         } else {
           clearInterval(this.intervalID);
@@ -35,7 +35,7 @@ struct  MessageComponent{
 
   build() {
     Row(){
-      Image(this.messageInfo.headImage)
+      Image(this.isOwnMessage?$r("app.media.touxiang_1"):$r("app.media.vector_ai"))
         .width(33)
         .height(33)
         .objectFit(ImageFit.Contain)
@@ -43,10 +43,10 @@ struct  MessageComponent{
 
 
       Column({space:5}){
-        Text(this.messageInfo.sendUser)
+        Text(this.messageBean.role)
           .margin({ left:6, right:5 })
           .fontWeight(FontWeight.Bold)
-        Text(this.isOwnMessage?this.messageInfo?.messageContent:this.answer)
+        Text(this.isOwnMessage?this.messageBean.content:this.answer)
           .backgroundColor(this.isOwnMessage?$r("app.color.primaryColor"):'#F8FAFC')
           .fontColor(this.isOwnMessage?$r("app.color.start_window_background"):'#475569')
           .padding(10)

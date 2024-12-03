@@ -7,7 +7,7 @@ import { BaseViewModel } from "./BaseViewModel";
 
 export class  ChatMessageViewModel extends  BaseViewModel{
 
-  // 普通请求
+  // 普通请求,这是请求获取大数据返回数据的
   async    postXf(question:string,user:string): Promise<string>{
     const xfRequestBean = new XFRequestBean();
     const messages = new MessagesBean()
@@ -28,6 +28,12 @@ export class  ChatMessageViewModel extends  BaseViewModel{
      }
 
   }
+
+
+
+  /**
+   * 这里是请求查询messages的
+   */
 
 
   // //流式请求
