@@ -5,6 +5,7 @@ export struct  BottomComponent{
 
   @State content:string=""
 
+
   //定义发送消息的方法
   sendMessage:(content:string)=>void = () => {}
 

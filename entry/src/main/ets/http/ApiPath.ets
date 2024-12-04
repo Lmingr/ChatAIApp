@@ -5,7 +5,10 @@ export  class  ApiPath{
   public static  login=ApiPath.baseUrl+"users/login";
   public static  register=ApiPath.baseUrl+"users/register";
 
-  public static  foundList=ApiPath.baseUrl+"users/foundlist"
+  public static  foundList=ApiPath.baseUrl+"users/foundlist?username="
+
+
+  public static  foundMessage=ApiPath.baseUrl+"users/foundmessage?mid="
 
 
   public static  xfUrl="https://spark-api-open.xf-yun.com/v1/chat/completions"

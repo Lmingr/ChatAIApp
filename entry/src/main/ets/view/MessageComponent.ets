@@ -8,6 +8,7 @@ struct  MessageComponent{
 
   @Prop
   messageBean:MessageBean
+  @Link isSendMessage:boolean
 
   @State//是不是user发的消息
   isOwnMessage:boolean = this.messageBean?.role=="user"
@@ -46,7 +47,7 @@ struct  MessageComponent{
         Text(this.messageBean.role)
           .margin({ left:6, right:5 })
           .fontWeight(FontWeight.Bold)
-        Text(this.isOwnMessage?this.messageBean.content:this.answer)
+        Text(!this.isOwnMessage&&this.isSendMessage?this.answer:this.messageBean.content)
           .backgroundColor(this.isOwnMessage?$r("app.color.primaryColor"):'#F8FAFC')
           .fontColor(this.isOwnMessage?$r("app.color.start_window_background"):'#475569')
           .padding(10)

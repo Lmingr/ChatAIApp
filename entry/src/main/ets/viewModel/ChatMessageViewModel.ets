@@ -1,11 +1,18 @@
+import { UserMessage } from "../bean/UserMessage";
 import { MessagesBean, XFRequestBean } from "../bean/XFRequestBean";
 import { XFResultBean } from "../bean/XFResultBean";
 import { ApiPath } from "../http/ApiPath";
+import { BaseResponse } from "../http/BaseResponse";
 import { showToast } from "../utils/ComponentUtils";
 import { BaseViewModel } from "./BaseViewModel";
 
 
 export class  ChatMessageViewModel extends  BaseViewModel{
+
+
+
+  userMessage:UserMessage=new UserMessage(1,"","","",new Date,[])
+
 
   // 普通请求,这是请求获取大数据返回数据的
   async    postXf(question:string,user:string): Promise<string>{
@@ -30,11 +37,20 @@ export class  ChatMessageViewModel extends  BaseViewModel{
   }
 
 
-
   /**
    * 这里是请求查询messages的
    */
 
+  async foundMessage(mid:number):Promise<UserMessage>
+  {
+   let res= await this.get<BaseResponse<UserMessage>>(ApiPath.foundMessage,mid)
+
+    if(res) {
+       return res.data
+    }
+
+    return this.userMessage;
+  }
 
   // //流式请求
   // async postXfStream(callback:(data:string)=>void){

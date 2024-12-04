@@ -14,7 +14,6 @@ export  class  HistoryViewModel extends  BaseViewModel{
   async foundMessageList(username:string):Promise<UserMessage[]>
   {
    await this.get<BaseResponse<UserMessage[]>>(ApiPath.foundList,username).then((res)=>{
-
           if(res) {
             Logger.info("res的值是多少呀222222"+res.data.length)
             this.userMessageBean=res.data

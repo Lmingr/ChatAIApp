@@ -58,6 +58,7 @@ export  struct HistoryPage{
             MessageComponent({userMessage:item})
           }
           .onClick(()=>{
+            router.pushUrl({url:'pages/ChatToAIPage',params:{mid:item.mid,isNew:false}})
             showToast("点击了"+item.mid)
           })
         })

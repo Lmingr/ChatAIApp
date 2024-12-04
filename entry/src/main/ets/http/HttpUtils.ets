@@ -37,10 +37,10 @@ export  class  HttpUtils{
     return await this.HandleResponse<T>(url,httpRequest,options)
   }
 
-  async get<T extends BaseResponse<object>>(url:string,username:string){
+  async get<T extends BaseResponse<object>>(url:string,param:number|string){
     let httpRequest=http.createHttp()
     let options = await this.createHttpRequestOptions(http.RequestMethod.GET)
-    return await this.HandleResponse<T>(url+`?username=${username}`,httpRequest,options)
+    return await this.HandleResponse<T>(url+`${param}`,httpRequest,options)
   }
 
 

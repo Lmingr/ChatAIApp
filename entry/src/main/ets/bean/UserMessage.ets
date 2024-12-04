@@ -62,6 +62,7 @@ export class  UserMessage{
     return this._messageList
   }
 
+
   constructor(mid: number, username: string, messageTopic: string, messageContent: string, messageDate: Date,
     messageList: MessageBean[]) {
     this._mid = mid

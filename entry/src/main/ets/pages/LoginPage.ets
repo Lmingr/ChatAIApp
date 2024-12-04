@@ -118,7 +118,7 @@ struct LoginPage{
             loginViewModel.Login(this.account,this.password,(isSuccess)=>{
               if(isSuccess){
                 showToast("登录成功")
-                router.pushUrl({url:'pages/MainPage'})
+                router.pushUrl({url:'pages/MainPage',params:{}})
               }else{
                 showToast("登录失败")
               }
