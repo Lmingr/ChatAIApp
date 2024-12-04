@@ -1,3 +1,4 @@
+import { MessageUpdateBean } from "../bean/MessageUpdateBean";
 import { UserMessage } from "../bean/UserMessage";
 import { MessagesBean, XFRequestBean } from "../bean/XFRequestBean";
 import { XFResultBean } from "../bean/XFResultBean";
@@ -11,7 +12,7 @@ export class  ChatMessageViewModel extends  BaseViewModel{
 
 
 
-  userMessage:UserMessage=new UserMessage(1,"","","",new Date,[])
+  userMessage:UserMessage=new UserMessage()
 
 
   // 普通请求,这是请求获取大数据返回数据的
@@ -40,7 +41,6 @@ export class  ChatMessageViewModel extends  BaseViewModel{
   /**
    * 这里是请求查询messages的
    */
-
   async foundMessage(mid:number):Promise<UserMessage>
   {
    let res= await this.get<BaseResponse<UserMessage>>(ApiPath.foundMessage,mid)
@@ -51,6 +51,21 @@ export class  ChatMessageViewModel extends  BaseViewModel{
 
     return this.userMessage;
   }
+
+
+  async  updateMessage(messageUpdateBean:MessageUpdateBean){
+    await this.post(ApiPath.updateMessage,messageUpdateBean)
+    showToast("添加成功了")
+  }
+
+
+  async  insertMessage(userMessage:UserMessage){
+
+    await this.post(ApiPath.insertMessage,userMessage)
+    showToast("新增成功")
+  }
+
+
 
   // //流式请求
   // async postXfStream(callback:(data:string)=>void){

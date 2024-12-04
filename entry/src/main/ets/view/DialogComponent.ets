@@ -1,5 +1,6 @@
 import { promptAction } from "@kit.ArkUI";
 
+@Preview
 @Component
 export struct  DialogComponent{
 
@@ -19,19 +20,33 @@ export struct  DialogComponent{
       Text(this.message)
         .fontSize(14)
 
-      Button('CONFIRM')
-        .fontSize(16)
-        .fontColor('#0A59F7')
-        .backgroundColor(Color.White)
-        .onClick(() => {
-          let dialogId = AppStorage.get<number>('dialogId');
-          promptAction.closeCustomDialog(dialogId)
-        })
-        .width('100%')
-        .margin({
-          top: 8,
-          bottom: 16
-        })
+      Row(){
+        Button('确认')
+          .fontSize(16)
+          .fontColor('#0A59F7')
+          .backgroundColor(Color.White)
+          .onClick(() => {
+          })
+          .width('100%')
+          .margin({
+            top: 8,
+            bottom: 16
+          })
+
+        Button('取消')
+          .fontSize(16)
+          .fontColor('#0A59F7')
+          .backgroundColor(Color.White)
+          .onClick(() => {
+          })
+          .width('100%')
+          .margin({
+            top: 8,
+            bottom: 16
+          })
+      }
+      .justifyContent(FlexAlign.SpaceBetween)
+
     }
     .padding({
       left: 24,

@@ -5,14 +5,11 @@ import { Logger } from "../utils/Logger"
 @Component
 export struct MessagePage{
 
-
-
-
   build() {
     Column(){
       Button(`新建聊天`)
         .onClick(()=>{
-          router.pushUrl({url:'pages/ChatToAIPage',params:{isNew:true}})
+          router.pushUrl({url:'pages/ChatToAIPage',params:{isNewChat:true}})
         })
     }
     .justifyContent(FlexAlign.Center)

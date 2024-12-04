@@ -8,13 +8,17 @@ struct  MessageComponent{
 
   @Prop
   messageBean:MessageBean
-  @Link isSendMessage:boolean
 
-  @State//是不是user发的消息
+  @Prop isSendMessage:boolean
+
+  //判断是不是user发的消息
+  @State
   isOwnMessage:boolean = this.messageBean?.role=="user"
-
+   //AI答复的需要有次序效果
   @State answer:string=""
+  //AI答复的次序位置
   @State pos:number=0
+
   @State intervalID:number=0
 
 

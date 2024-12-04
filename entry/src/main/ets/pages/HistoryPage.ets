@@ -58,7 +58,7 @@ export  struct HistoryPage{
             MessageComponent({userMessage:item})
           }
           .onClick(()=>{
-            router.pushUrl({url:'pages/ChatToAIPage',params:{mid:item.mid,isNew:false}})
+            router.pushUrl({url:'pages/ChatToAIPage',params:{mid:item.mid,isNewChat:false}})
             showToast("点击了"+item.mid)
           })
         })
@@ -76,7 +76,5 @@ export  struct HistoryPage{
     .padding({top:this.statusBar})
     .height(`100%`)
     .justifyContent(FlexAlign.SpaceBetween)
-
-
   }
 }

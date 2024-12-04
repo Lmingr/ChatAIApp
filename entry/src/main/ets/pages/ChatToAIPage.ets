@@ -1,5 +1,5 @@
 import { MessageInfoModel } from '../bean/MessageInfoModel'
-import { router } from '@kit.ArkUI'
+import { promptAction, router } from '@kit.ArkUI'
 import MessageComponent from '../view/MessageComponent'
 import { MessageLoadingComponent } from '../view/MessageLoadingComponent'
 import { BottomComponent } from '../view/BottomComponent'
@@ -8,6 +8,8 @@ import { chatMessageViewModel } from '../viewModel/ChatMessageViewModel'
 import { MessageBean } from '../bean/MessageBean'
 import { UserMessage } from '../bean/UserMessage'
 import { DialogComponent } from '../view/DialogComponent'
+import { MessageUpdateBean } from '../bean/MessageUpdateBean'
+import { showToast } from '../utils/ComponentUtils'
 
 
 @Entry
@@ -22,20 +24,22 @@ struct  ChatToAIPage{
   @State loading:boolean=false
   @State messageList:MessageBean[]=[]
   @State mid:number=0
-  @State isNew:boolean=false
+
 
   @State isSendMessage:boolean=false
 
-  dialogController : CustomDialogController | null = new CustomDialogController(
-    {
-      builder:DialogComponent,
+  @State isNewChat:boolean=false
 
-    })
+  @Builder
+  customDialogComponent(){
+      DialogComponent()
+  }
+
 
   aboutToAppear(): void {
     let  params=router.getParams() as  Record<string, number|boolean>;
-    this.isNew=params[`isNew`] as boolean
-    if(!this.isNew)
+    this.isNewChat=params[`isNewChat`] as boolean
+    if(!this.isNewChat)
     {
        this.mid=params[`mid`] as number
        Logger.info("mid:"+this.mid)
@@ -43,7 +47,6 @@ struct  ChatToAIPage{
         this.messageList=res.messageList
       })
     }
-
   }
 
   build() {
@@ -55,7 +58,11 @@ struct  ChatToAIPage{
           .zIndex(2)
           .onClick(()=>{
             //这里搞个弹窗
-
+            // promptAction.openCustomDialog({
+            //   builder:()=>{
+            //     this.customDialogComponent()
+            //   }
+            // })
             router.back()
           })
         Text(`ChatAI`)
@@ -152,7 +159,29 @@ struct  ChatToAIPage{
 
 
   aboutToDisappear(): void {
-    Logger.info(" aboutToDisappear()这里是页面不显示的时候")
+    if(this.isNewChat&&this.messageList.length>1){
+      //需要满足信息的前两个内容是作为标题和内容的
+        let  userMessage=new UserMessage()
+        userMessage.username="luomingr"
+        Logger.info("这里什么时候才会反应")
+         userMessage.messageTopic=  this.messageList[0].content
+         userMessage.messageContent=  this.messageList[1].content
+         userMessage.messageList=this.messageList
+         chatMessageViewModel.insertMessage(userMessage)
+         showToast("新建成功啦")
+    }
+    else if(this.isSendMessage){
+      //在页面消息的时候做更新操作,这里是修改
+      let messageUpdateBean=new MessageUpdateBean()
+      messageUpdateBean.mid=this.mid
+      messageUpdateBean.messageList=this.messageList
+      chatMessageViewModel.updateMessage(messageUpdateBean)
+      showToast("修改成功")
+      Logger.info(" aboutToDisappear()这里是页面不显示的时候")
+    }
+   else{
+     showToast("啥都没变过啦")
+   }
   }
 
 }
