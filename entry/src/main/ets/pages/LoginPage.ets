@@ -21,7 +21,6 @@ struct LoginPage{
 
   build() {
     Column() {
-
       Row(){
         Text('Welcome ')
           .fontSize(24)
@@ -118,6 +117,7 @@ struct LoginPage{
             loginViewModel.Login(this.account,this.password,(isSuccess)=>{
               if(isSuccess){
                 showToast("登录成功")
+                AppStorage.setOrCreate('username', this.account)
                 router.pushUrl({url:'pages/MainPage'})
               }else{
                 showToast("登录失败")
@@ -127,6 +127,7 @@ struct LoginPage{
             showToast("请先勾选协议")
           }
         })
+
     }
     .width('100%')
     .height('100%')

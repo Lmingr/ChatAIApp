@@ -13,13 +13,15 @@ export  struct HistoryPage{
 
   statusBar: number = AppStorage.get<number>('statusBar') as number
 
+   username =AppStorage.get('username') as string
+
   private scroller: Scroller = new Scroller()
 
   @State
   messageList:UserMessage[]=[]
 
   aboutToAppear(){
-     historyViewModel.foundMessageList("luomingr").then((res)=>{
+     historyViewModel.foundMessageList(this.username).then((res)=>{
         this.messageList=res
      })
   }

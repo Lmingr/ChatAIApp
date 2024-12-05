@@ -5,13 +5,13 @@
         "name": "default",
         "type": "HarmonyOS",
         "material": {
-          "certpath": "C:\\Users\\Administrator\\.ohos\\config\\default_ChatAIApplication_QJ2HOTcZyq7gwB0Jriw7bI1Ygg5pdBkRl5g_-13VZs4=.cer",
-          "storePassword": "0000001B2961E393EA361784C2C07ECC4EE027EBE340CA3650B28362B2E518954896D5F41D443D205300B0",
+          "certpath": "C:\\Users\\Administrator\\.ohos\\config\\default_ChatAIApp_imUMfL1Z6kM08nBpcQrCG7v7eSbulU9GjRjULmRgD3A=.cer",
+          "storePassword": "0000001B2ABA0C2F0732FDA08890CFFDCA4E0408F8F0BFC011D0B277E58A1305596F73640E1D61A6A4BD65",
           "keyAlias": "debugKey",
-          "keyPassword": "0000001BB98BBFC98268E129DBE93B4D50E1EEE9CEFBEFC129F530588D920C9A20D3AE9EADDF84C82FFA91",
-          "profile": "C:\\Users\\Administrator\\.ohos\\config\\default_ChatAIApplication_QJ2HOTcZyq7gwB0Jriw7bI1Ygg5pdBkRl5g_-13VZs4=.p7b",
+          "keyPassword": "0000001BA6B15E4AC88ED68F62B7338B256048A7ECE94590ABAAD7449D0EF60BA318844F4FA164702AA320",
+          "profile": "C:\\Users\\Administrator\\.ohos\\config\\default_ChatAIApp_imUMfL1Z6kM08nBpcQrCG7v7eSbulU9GjRjULmRgD3A=.p7b",
           "signAlg": "SHA256withECDSA",
-          "storeFile": "C:\\Users\\Administrator\\.ohos\\config\\default_ChatAIApplication_QJ2HOTcZyq7gwB0Jriw7bI1Ygg5pdBkRl5g_-13VZs4=.p12"
+          "storeFile": "C:\\Users\\Administrator\\.ohos\\config\\default_ChatAIApp_imUMfL1Z6kM08nBpcQrCG7v7eSbulU9GjRjULmRgD3A=.p12"
         }
       }
     ],

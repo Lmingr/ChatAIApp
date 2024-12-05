@@ -18,7 +18,7 @@ struct  ChatToAIPage{
 
   @State resData:string=""
   statusBar: number = AppStorage.get<number>('statusBar') as number
-
+  username =AppStorage.get('username') as string
   private scroller: Scroller = new Scroller()
 
   @State loading:boolean=false
@@ -29,11 +29,6 @@ struct  ChatToAIPage{
   @State isSendMessage:boolean=false
 
   @State isNewChat:boolean=false
-
-  @Builder
-  customDialogComponent(){
-      DialogComponent()
-  }
 
 
   aboutToAppear(): void {
@@ -57,12 +52,6 @@ struct  ChatToAIPage{
           .height(18)
           .zIndex(2)
           .onClick(()=>{
-            //这里搞个弹窗
-            // promptAction.openCustomDialog({
-            //   builder:()=>{
-            //     this.customDialogComponent()
-            //   }
-            // })
             router.back()
           })
         Text(`ChatAI`)
@@ -162,8 +151,8 @@ struct  ChatToAIPage{
     if(this.isNewChat&&this.messageList.length>1){
       //需要满足信息的前两个内容是作为标题和内容的
         let  userMessage=new UserMessage()
-        userMessage.username="luomingr"
-        Logger.info("这里什么时候才会反应")
+         userMessage.username=this.username
+         Logger.info("这里什么时候才会反应")
          userMessage.messageTopic=  this.messageList[0].content
          userMessage.messageContent=  this.messageList[1].content
          userMessage.messageList=this.messageList
