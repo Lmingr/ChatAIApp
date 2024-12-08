@@ -69,7 +69,7 @@ struct  ChatToAIPage{
         color:Color.Black,
         width:{bottom:1}
       })
-      .height(`10%`)
+      .height(`6%`)
       .width('100%')
 
       List({space:20,scroller:this.scroller}){

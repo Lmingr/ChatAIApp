@@ -129,7 +129,7 @@ struct  RegisterPage{
           registerViewModel.register(this.account,this.password,(isSuccess)=>{
             if(isSuccess){
               showToast('注册成功！跳转导登录页')
-              router.back({url:'pages//LoginPage'})
+              router.back({url:'pages/LoginPage'})
             }else{
               showToast('注册失败！')
             }

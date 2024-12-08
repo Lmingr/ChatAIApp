@@ -114,8 +114,6 @@ export class  UserInfo{
   }
 
 
-
-
   private _createdTime: Date;
 
   public set createdTime(value: Date) {

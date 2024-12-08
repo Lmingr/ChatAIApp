@@ -1,12 +1,16 @@
+import { UserMessage } from "../bean/UserMessage"
 import { HistoryPage } from "../pages/HistoryPage"
 import { MessagePage } from "../pages/MessagePage"
 import { MinePage } from "../pages/MinePage"
+import { Logger } from "../utils/Logger"
+import { historyViewModel } from "../viewModel/HistoryViewModel"
 
 
 @Component
 export  struct   TabComponent{
 
   private  tabsController:TabsController=new TabsController()
+
 
   @Link currentIndex:number
 
@@ -39,8 +43,9 @@ export  struct   TabComponent{
         }.tabBar(this.tabBuilder("chat", 0, $r("app.media.messages_select"), $r("app.media.messages") ))
 
         TabContent() {
-          HistoryPage()
-        }.tabBar(this.tabBuilder("saved", 1, $r("app.media.archive_add"), $r("app.media.vuesax_archive_add") ))
+          MinePage()
+        }
+        .tabBar(this.tabBuilder("mine", 1, $r("app.media.archive_add"), $r("app.media.vuesax_archive_add") ))
 
       }
     }

@@ -3,6 +3,8 @@
     "pages/LoginPage",
     "pages/MainPage",
     "pages/WelcomePage",
-    "pages/ChatToAIPage"
+    "pages/ChatToAIPage",
+    "pages/RegisterPage",
+    "pages/HistoryPage"
   ]
 }

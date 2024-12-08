@@ -7,51 +7,57 @@ import { MessageComponent } from "../view/MesssageComponent"
 import { historyViewModel } from "../viewModel/HistoryViewModel"
 
 
-@Preview
+@Entry
 @Component
 export  struct HistoryPage{
 
   statusBar: number = AppStorage.get<number>('statusBar') as number
 
-   username =AppStorage.get('username') as string
+  username =AppStorage.get('username') as string
 
   private scroller: Scroller = new Scroller()
 
-  @State
-  messageList:UserMessage[]=[]
+  @State messageList:UserMessage[]=[]
 
-  aboutToAppear(){
-     historyViewModel.foundMessageList(this.username).then((res)=>{
-        this.messageList=res
-     })
+
+  aboutToAppear(): void {
+    historyViewModel.foundMessageList(this.username).then((res)=>{
+      this.messageList=res
+    })
   }
 
   build() {
     Column(){
-      Stack({alignContent:Alignment.BottomEnd}){//开始居左
-        Text(`Saved Chat`)
-          .fontColor(Color.Black)
-          .fontSize(20)
-          .width('100%')
-          .textAlign(TextAlign.Center)
-        Image($r("app.media.search"))
+      Row(){//开始居左
+        Image($r("app.media.Button_Back"))
           .width(18)
           .height(18)
           .zIndex(2)
           .onClick(()=>{
             router.back()
           })
+        Text(`Saved Chat`)
+          .fontColor(Color.Black)
+          .fontSize(20)
+          .textAlign(TextAlign.Center)
+        Image($r("app.media.search"))
+          .width(18)
+          .height(18)
+          .zIndex(2)
+          .onClick(()=>{
+            showToast("此功能还未开发")
+          })
       }
+      .justifyContent(FlexAlign.SpaceBetween)
       .padding({
         left:10,
-        right:10,
-        bottom:10
+        right:10
       })
       .border({
         color:Color.Black,
         width:{bottom:1}
       })
-      .height(`10%`)
+      .height(`6%`)
       .width(`100%`)
 
       List({space:20,scroller:this.scroller}){
@@ -73,7 +79,6 @@ export  struct HistoryPage{
         top:20,
         bottom:10
       })
-
     }
     .padding({top:this.statusBar})
     .height(`100%`)

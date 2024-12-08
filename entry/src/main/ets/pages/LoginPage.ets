@@ -128,6 +128,21 @@ struct LoginPage{
           }
         })
 
+      Text(){
+        Span('Don’t have an account?')
+          .fontSize(14)
+          .fontColor(Color.Black)
+        Span('Sign up')
+          .fontSize(14)
+          .fontColor($r("app.color.primaryColor"))
+          .onClick(()=>{
+            router.pushUrl({url:'pages/RegisterPage'})
+          })
+      }
+      .margin({
+        top:30
+      })
+
     }
     .width('100%')
     .height('100%')
