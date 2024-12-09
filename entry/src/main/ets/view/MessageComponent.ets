@@ -21,6 +21,7 @@ struct  MessageComponent{
 
   @State intervalID:number=0
 
+  @Link isGenerate:boolean
 
   aboutToAppear(): void {
     this.answer = '';
@@ -32,6 +33,7 @@ struct  MessageComponent{
           this.answer = this.answer.concat(this.messageBean?.content.charAt(this.pos))
           this.pos += 1;
         } else {
+          this.isGenerate=false
           clearInterval(this.intervalID);
         }
       }, 30)

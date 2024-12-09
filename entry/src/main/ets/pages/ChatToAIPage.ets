@@ -25,7 +25,7 @@ struct  ChatToAIPage{
   @State messageList:MessageBean[]=[]
   @State mid:number=0
 
-
+  @State isGenerate:boolean=false
   @State isSendMessage:boolean=false
 
   @State isNewChat:boolean=false
@@ -34,6 +34,7 @@ struct  ChatToAIPage{
   aboutToAppear(): void {
     let  params=router.getParams() as  Record<string, number|boolean>;
     this.isNewChat=params[`isNewChat`] as boolean
+
     if(!this.isNewChat)
     {
        this.mid=params[`mid`] as number
@@ -41,6 +42,8 @@ struct  ChatToAIPage{
        chatMessageViewModel.foundMessage(this.mid).then((res)=>{
         this.messageList=res.messageList
       })
+    }else{
+      this.messagePush("AI",'你好呀欢迎使用AI交流嗷')
     }
   }
 
@@ -75,7 +78,7 @@ struct  ChatToAIPage{
       List({space:20,scroller:this.scroller}){
         ForEach(this.messageList, (item:MessageBean)=>{
           ListItem(){
-            MessageComponent({messageBean:item,isSendMessage:this.isSendMessage})
+            MessageComponent({messageBean:item,isSendMessage:this.isSendMessage,isGenerate:this.isGenerate})
           }
         })
         MessageLoadingComponent()
@@ -86,10 +89,12 @@ struct  ChatToAIPage{
       .padding({top:20,bottom:10})
 
       BottomComponent({
+
         sendMessage: (content:string) => {
           this.sendMessage(content)
           this.isSendMessage = true
-        }
+        },
+        isGenerate:this.isGenerate
       })
     }
     .padding({top:this.statusBar})
@@ -148,13 +153,13 @@ struct  ChatToAIPage{
 
 
   aboutToDisappear(): void {
-    if(this.isNewChat&&this.messageList.length>1){
+    if(this.isNewChat&&this.messageList.length>2){
       //需要满足信息的前两个内容是作为标题和内容的
         let  userMessage=new UserMessage()
          userMessage.username=this.username
-         Logger.info("这里什么时候才会反应")
-         userMessage.messageTopic=  this.messageList[0].content
-         userMessage.messageContent=  this.messageList[1].content
+         userMessage.messageTopic=  this.messageList[1].content
+         Logger.info("messageContent"+this.messageList[2].content.substring(0,40))
+         userMessage.messageContent= this.messageList[2].content.substring(0,40)
          userMessage.messageList=this.messageList
          chatMessageViewModel.insertMessage(userMessage)
          showToast("新建成功啦")

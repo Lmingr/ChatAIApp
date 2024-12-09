@@ -16,6 +16,7 @@ export class LoginViewModel extends BaseViewModel{
     baseReq.password=password
     this.post<BaseResponse<UserInfo>>(ApiPath.login,baseReq).then( async response=>{
       if(response && response.state=='200'){
+        AppStorage.setOrCreate('userInfo', response.data)
         Logger.info("LoginViewModel -》》登录成功1111！！！"+response.state)
         Logger.info("res 返回数据 phone-》"+response.data?.phone)
         callback(true)

@@ -25,7 +25,7 @@ struct  RegisterPage{
       .width(`100%`)
 
       Row(){
-        Text('hello there')
+        Text('你好')
           .fontSize(24)
           .fontWeight(FontWeight.Bold)
         Image($r("app.media.emoji"))
@@ -38,7 +38,7 @@ struct  RegisterPage{
       .width(`100%`)
       .justifyContent(FlexAlign.Start)
 
-      Text(`Please enter your account and password to create an account`)
+      Text(`请输入需要注册的账号和密码`)
         .margin(10)
         .fontSize(12)
         .width(`100%`)
@@ -57,7 +57,7 @@ struct  RegisterPage{
 
   @Builder LoginView(){
     Column(){
-        Text('Your username')
+        Text('账号')
           .fontSize(14)
           .fontWeight(FontWeight.Bold)
           .fontColor(Color.Black)
@@ -78,7 +78,7 @@ struct  RegisterPage{
       }
       .width(`100%`)
 
-      Text('Create password')
+      Text('密码')
         .fontSize(14)
         .fontWeight(FontWeight.Bold)
         .fontColor(Color.Black)
@@ -108,7 +108,7 @@ struct  RegisterPage{
           .width(16)
           .height(16)
           .select(true)
-        Text(`I agree to Chatbot_AI Public Agreement, Terms, & Privacy Policy.`)
+        Text(`我同意app的相关隐私政策和隐私协议`)
           .width('80%')
           .fontSize(14)
           .fontWeight(FontWeight.Bold)
@@ -119,7 +119,7 @@ struct  RegisterPage{
       })
       .width('100%')
 
-      Button('Sign up')
+      Button('注册')
         .width(`70%`)
         .margin({
           top:40

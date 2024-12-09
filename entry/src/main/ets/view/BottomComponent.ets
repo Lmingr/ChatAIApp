@@ -5,18 +5,20 @@ export struct  BottomComponent{
 
   @State content:string=""
 
+  @Link isGenerate:boolean
 
   //定义发送消息的方法
   sendMessage:(content:string)=>void = () => {}
 
   build() {
     Row({space:5}){
-      TextInput({placeholder:"Ask me anything",text:$$this.content})
+      TextInput({placeholder:this.isGenerate?"正在生成中...":"Ask me anything",text:$$this.content})
         .height(40)
         .borderRadius(15)
         .backgroundColor('#FAFAFA')
         .layoutWeight(1)
         .id("input")
+        .focusable(this.isGenerate?false:true)
         .shadow(ShadowStyle.OUTER_FLOATING_SM)
 
       Image($r("app.media.Button_Send"))

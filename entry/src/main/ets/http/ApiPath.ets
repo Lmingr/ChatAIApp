@@ -4,6 +4,7 @@ export  class  ApiPath{
   // public static  baseUrl="http://114.132.225.103:8090/";
   public static  login=ApiPath.baseUrl+"users/login";
   public static  register=ApiPath.baseUrl+"users/register";
+
   public static  foundList=ApiPath.baseUrl+"users/foundlist?username="
   public static  foundMessage=ApiPath.baseUrl+"users/foundmessage?mid="
   public static  updateMessage=ApiPath.baseUrl+"users/message";

@@ -13,11 +13,21 @@ export struct MessagePage{
         .fontSize(30)
         .fontColor($r("app.color.primaryColor"))
 
-      Image($r("app.media.Group_AI"))
+      Image($r("app.media.BigAI"))
         .width('50%')
 
+      Text('小喵是一款人工智能聊天机器人，它可以快速准确地回答大家在日常生活中的疑问')
+        .width('80%')
+        .fontSize(13)
+        .padding(25)
+        .border({
+          radius:20
+        })
+        .fontColor($r("app.color.date_Color"))
+        .backgroundColor($r("app.color.message_Color"))
+
       Column(){
-        Button(`新建聊天`)
+        Button(`开始聊天`)
           .onClick(()=>{
             router.pushUrl({url:'pages/ChatToAIPage',params:{isNewChat:true}})
           })

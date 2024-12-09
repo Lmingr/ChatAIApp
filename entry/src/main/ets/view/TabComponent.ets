@@ -45,9 +45,12 @@ export  struct   TabComponent{
         TabContent() {
           MinePage()
         }
-        .tabBar(this.tabBuilder("mine", 1, $r("app.media.archive_add"), $r("app.media.vuesax_archive_add") ))
-
+        .tabBar(this.tabBuilder("mine", 1, $r("app.media.person_select"), $r("app.media.person") ))
       }
+      .onChange((index: number) => {
+        // currentIndex控制TabContent显示页签
+        this.currentIndex = index
+      })
     }
 
 

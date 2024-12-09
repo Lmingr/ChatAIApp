@@ -22,7 +22,7 @@ struct LoginPage{
   build() {
     Column() {
       Row(){
-        Text('Welcome ')
+        Text('欢迎 ')
           .fontSize(24)
           .fontWeight(FontWeight.Bold)
         Image($r("app.media.emoji"))
@@ -32,13 +32,13 @@ struct LoginPage{
       .width(`100%`)
       .justifyContent(FlexAlign.Start)
 
-      Text(`Please enter your account and password to sign in`)
+      Text(`请输入您的账号和密码`)
         .margin(10)
         .fontSize(12)
         .width(`100%`)
         .textAlign(TextAlign.Start)
 
-      Text('Account')
+      Text('账号')
         .margin({
           top:'30%'
         })
@@ -64,7 +64,7 @@ struct LoginPage{
       }
       .width(`100%`)
 
-      Text('Password')
+      Text('密码')
         .fontSize(18)
         .fontWeight(FontWeight.Bold)
         .fontColor(Color.Black)
@@ -98,7 +98,7 @@ struct LoginPage{
           .width(16)
           .height(16)
           .select(true)
-        Text(`remenber me`)
+        Text(`记住账号`)
           .fontSize(14)
       }
       .margin({
@@ -106,7 +106,7 @@ struct LoginPage{
       })
       .width('100%')
 
-      Button(`Sign in`)
+      Button(`登录`)
         .backgroundColor('#17C3CE')
         .margin({
           top:20
@@ -129,15 +129,18 @@ struct LoginPage{
         })
 
       Text(){
-        Span('Don’t have an account?')
+        Span('没有账号？那就先')
           .fontSize(14)
           .fontColor(Color.Black)
-        Span('Sign up')
+        Span('注册')
           .fontSize(14)
           .fontColor($r("app.color.primaryColor"))
           .onClick(()=>{
             router.pushUrl({url:'pages/RegisterPage'})
           })
+        Span('一下吧')
+          .fontSize(14)
+          .fontColor(Color.Black)
       }
       .margin({
         top:30
