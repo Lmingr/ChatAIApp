@@ -65,10 +65,7 @@ export class  ChatMessageViewModel extends  BaseViewModel{
   }
 
 
-  async  deleteMessage(mid:number){
-    await this.get(ApiPath.deleteMessage,mid)
-    showToast("删除 成功了")
-  }
+
 
 
 

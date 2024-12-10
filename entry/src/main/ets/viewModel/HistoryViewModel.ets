@@ -2,12 +2,12 @@
 import { UserMessage } from "../bean/UserMessage";
 import { ApiPath } from "../http/ApiPath";
 import { BaseResponse } from "../http/BaseResponse";
+import { showToast } from "../utils/ComponentUtils";
 import { Logger } from "../utils/Logger";
 import { BaseViewModel } from "./BaseViewModel";
 
 
 export  class  HistoryViewModel extends  BaseViewModel{
-
 
   userMessageBean:UserMessage[]=[]
 
@@ -22,6 +22,13 @@ export  class  HistoryViewModel extends  BaseViewModel{
 
     return  this.userMessageBean;
   }
+
+  async  deleteMessage(mid:number){
+    await this.get(ApiPath.deleteMessage,mid)
+    showToast("删除 成功了")
+  }
+
+
 }
 
 export const historyViewModel=new HistoryViewModel()

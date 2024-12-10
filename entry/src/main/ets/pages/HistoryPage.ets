@@ -26,15 +26,18 @@ export  struct HistoryPage{
     })
   }
 
+ async  deleteMessage(mid:number){
+    historyViewModel.deleteMessage(mid).then(()=>{
+      showToast("删除成功")
+    })
+  }
+
+
   @Builder itemDelete(){
-    Column(){
-      Image($r("app.media.delete_page"))
-        .height(25)
-        .width(25)
+    Row(){
+      Button(`删除`)
+      Button(`删除`)
     }
-    .width(30)
-    .height("100%")
-    .backgroundColor($r("app.color.primaryColor"))
   }
 
   build() {
@@ -78,9 +81,13 @@ export  struct HistoryPage{
           }
           .swipeAction({
             end:{
-            actionAreaDistance:20,
             builder: this.itemDelete,
             onAction: ()=>{
+              animateTo({ duration: 1000 }, async () => {
+                let index=  this.messageList.indexOf(item)
+                await this.deleteMessage(item.mid)
+                this.messageList.splice(index, 1)
+              })
             }},
             edgeEffect:SwipeEdgeEffect.None
           })
