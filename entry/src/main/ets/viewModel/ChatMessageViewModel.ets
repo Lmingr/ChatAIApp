@@ -60,9 +60,14 @@ export class  ChatMessageViewModel extends  BaseViewModel{
 
 
   async  insertMessage(userMessage:UserMessage){
-
     await this.post(ApiPath.insertMessage,userMessage)
     showToast("新增成功")
+  }
+
+
+  async  deleteMessage(mid:number){
+    await this.get(ApiPath.deleteMessage,mid)
+    showToast("删除 成功了")
   }
 
 

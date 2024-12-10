@@ -26,6 +26,17 @@ export  struct HistoryPage{
     })
   }
 
+  @Builder itemDelete(){
+    Column(){
+      Image($r("app.media.delete_page"))
+        .height(25)
+        .width(25)
+    }
+    .width(30)
+    .height("100%")
+    .backgroundColor($r("app.color.primaryColor"))
+  }
+
   build() {
     Column(){
       Row(){//开始居左
@@ -65,6 +76,14 @@ export  struct HistoryPage{
           ListItem(){
             MessageComponent({userMessage:item})
           }
+          .swipeAction({
+            end:{
+            actionAreaDistance:20,
+            builder: this.itemDelete,
+            onAction: ()=>{
+            }},
+            edgeEffect:SwipeEdgeEffect.None
+          })
           .onClick(()=>{
             router.pushUrl({url:'pages/ChatToAIPage',params:{mid:item.mid,isNewChat:false}})
             showToast("点击了"+item.mid)

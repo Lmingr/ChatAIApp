@@ -9,5 +9,7 @@ export  class  ApiPath{
   public static  foundMessage=ApiPath.baseUrl+"users/foundmessage?mid="
   public static  updateMessage=ApiPath.baseUrl+"users/message";
   public static  insertMessage=ApiPath.baseUrl+"users/insert"
+
+  public static  deleteMessage=ApiPath.baseUrl+"delete?mid="
   public static  xfUrl="https://spark-api-open.xf-yun.com/v1/chat/completions"
 }

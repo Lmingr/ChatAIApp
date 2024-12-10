@@ -49,7 +49,7 @@ export struct  MessageComponent{
     .border({
       radius:15
     })
-    .backgroundColor($r("app.color.back_Color"))
+    .backgroundColor($r("app.color.message_Color"))
     .padding({
       top:15,
       left:20,

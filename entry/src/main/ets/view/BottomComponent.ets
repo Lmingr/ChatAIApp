@@ -18,12 +18,12 @@ export struct  BottomComponent{
         .backgroundColor('#FAFAFA')
         .layoutWeight(1)
         .id("input")
-        .focusable(this.isGenerate?false:true)
         .shadow(ShadowStyle.OUTER_FLOATING_SM)
 
-      Image($r("app.media.Button_Send"))
+      Image(this.isGenerate?$r("app.media.button_no_send"):$r("app.media.Button_Send"))
         .width(60)
         .height(60)
+        .enabled(this.isGenerate?false:true)
         .onClick(()=>{
           if(this.content){
             Logger.info("这里有运行吗"+this.content)

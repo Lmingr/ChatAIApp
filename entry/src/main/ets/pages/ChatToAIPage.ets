@@ -21,11 +21,14 @@ struct  ChatToAIPage{
   username =AppStorage.get('username') as string
   private scroller: Scroller = new Scroller()
 
+  //这个是在发送请求时的加载页
   @State loading:boolean=false
   @State messageList:MessageBean[]=[]
   @State mid:number=0
 
   @State isGenerate:boolean=false
+
+  //这个字段的目的是在请求答复的时候以流式的数据返回
   @State isSendMessage:boolean=false
 
   @State isNewChat:boolean=false
@@ -75,10 +78,13 @@ struct  ChatToAIPage{
       .height(`6%`)
       .width('100%')
 
+
+      //TODO，采用LazyForEach
       List({space:20,scroller:this.scroller}){
-        ForEach(this.messageList, (item:MessageBean)=>{
+        ForEach(this.messageList, (item:MessageBean,index:number)=>{
           ListItem(){
-            MessageComponent({messageBean:item,isSendMessage:this.isSendMessage,isGenerate:this.isGenerate})
+            MessageComponent({messageBean:item,isPolling:index==this.messageList.length-1
+              &&this.isSendMessage?true:false,isGenerate:this.isGenerate})
           }
         })
         MessageLoadingComponent()
@@ -89,10 +95,10 @@ struct  ChatToAIPage{
       .padding({top:20,bottom:10})
 
       BottomComponent({
-
         sendMessage: (content:string) => {
           this.sendMessage(content)
           this.isSendMessage = true
+          this.isGenerate=true
         },
         isGenerate:this.isGenerate
       })
@@ -105,12 +111,10 @@ struct  ChatToAIPage{
   //把消息存到消息队列中
   async  sendMessage(content:string):Promise<void>{
     //这里是每次使用者调用的时候
-
     // messageInfoModel.receiveUser="AI"
     // messageInfoModel.headImage=$r("app.media.touxiang_1")
     // this.messageList.push(messageInfoModel)
     await this.messagePush("user",content)
-    Logger.info(" this.loading11111111"+ this.loading)
     this.loading=true
     this.getResponseMessage(content,"user")
   }
