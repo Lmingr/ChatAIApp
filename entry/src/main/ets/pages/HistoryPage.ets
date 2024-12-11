@@ -1,8 +1,8 @@
-import { router } from "@kit.ArkUI"
-import { MessageBean } from "../bean/MessageBean"
+import { promptAction, router } from "@kit.ArkUI"
 import { UserMessage } from "../bean/UserMessage"
 import { showToast } from "../utils/ComponentUtils"
 import { Logger } from "../utils/Logger"
+import { DialogComponent } from "../view/DialogComponent"
 import { MessageComponent } from "../view/MesssageComponent"
 import { historyViewModel } from "../viewModel/HistoryViewModel"
 
@@ -10,6 +10,8 @@ import { historyViewModel } from "../viewModel/HistoryViewModel"
 @Entry
 @Component
 export  struct HistoryPage{
+
+  @State customDialogComponentId: number = 0
 
   statusBar: number = AppStorage.get<number>('statusBar') as number
 
@@ -19,25 +21,40 @@ export  struct HistoryPage{
 
   @State messageList:UserMessage[]=[]
 
-
   aboutToAppear(): void {
     historyViewModel.foundMessageList(this.username).then((res)=>{
       this.messageList=res
     })
   }
 
- async  deleteMessage(mid:number){
+
+
+  async  deleteMessage(mid:number){
+    Logger.info("删除"+mid)
     historyViewModel.deleteMessage(mid).then(()=>{
       showToast("删除成功")
     })
   }
 
 
-  @Builder itemDelete(){
+  @Builder itemDelete(item:UserMessage){
     Row(){
       Button(`删除`)
-      Button(`删除`)
+        .backgroundColor($r("app.color.primaryColor"))
+        .onClick(()=>{
+          promptAction.openCustomDialog({
+            builder:()=>{
+             this.customDialogComponent(item)
+            },
+            autoCancel:true,
+            width:"70%"
+          }).then((dialogId: number)=>{
+            this.customDialogComponentId=dialogId
+          })
+        })
     }
+    .padding(10)
+    .justifyContent(FlexAlign.SpaceEvenly)
   }
 
   build() {
@@ -80,15 +97,7 @@ export  struct HistoryPage{
             MessageComponent({userMessage:item})
           }
           .swipeAction({
-            end:{
-            builder: this.itemDelete,
-            onAction: ()=>{
-              animateTo({ duration: 1000 }, async () => {
-                let index=  this.messageList.indexOf(item)
-                await this.deleteMessage(item.mid)
-                this.messageList.splice(index, 1)
-              })
-            }},
+            end:{ builder: this.itemDelete(item)},
             edgeEffect:SwipeEdgeEffect.None
           })
           .onClick(()=>{
@@ -110,4 +119,56 @@ export  struct HistoryPage{
     .height(`100%`)
     .justifyContent(FlexAlign.SpaceBetween)
   }
+
+
+  @Builder
+  customDialogComponent(item:UserMessage) {
+    Column({space:10}) {
+      Row() {
+        Text('删除')
+          .fontSize(20)
+          .fontWeight(FontWeight.Bold)
+        Image($r("app.media.alert"))
+          .width(20)
+          .margin({
+            left:5
+          })
+      }
+      .width('100%')
+      .height(56)
+      .justifyContent(FlexAlign.Center)
+      Text("确认要删除该聊天话题吗？")
+        .fontSize(14)
+        .fontColor($r("app.color.dialog_Color"))
+      Row(){
+        Button('确认')
+          .fontSize(16)
+          .backgroundColor($r("app.color.primaryColor"))
+          .onClick(async () => {
+            await this.deleteMessage(item.mid)
+            let index=  this.messageList.indexOf(item)
+            this.messageList.splice(index, 1)
+            promptAction.closeCustomDialog(this.customDialogComponentId)
+          })
+        Button('取消')
+          .fontSize(16)
+          .backgroundColor($r("app.color.primaryColor"))
+          .onClick(() => {
+            promptAction.closeCustomDialog(this.customDialogComponentId)
+          })
+      }
+      .margin({
+        top:15,
+        bottom:10
+      })
+      .width("80%")
+      .justifyContent(FlexAlign.SpaceEvenly)
+
+    }
+    .width(`100%`)
+    .justifyContent(FlexAlign.Center)
+    .alignItems(HorizontalAlign.Center)
+    .borderRadius(32)
+  }
+
 }

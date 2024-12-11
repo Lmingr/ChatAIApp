@@ -24,6 +24,7 @@ export  class  HistoryViewModel extends  BaseViewModel{
   }
 
   async  deleteMessage(mid:number){
+    Logger.info("hhh")
     await this.get(ApiPath.deleteMessage,mid)
     showToast("删除 成功了")
   }

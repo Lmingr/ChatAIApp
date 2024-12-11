@@ -7,6 +7,7 @@ import { buffer, util } from '@kit.ArkTS'
 import { http } from '@kit.NetworkKit'
 import { loginViewModel } from '../viewModel/LoginViewModel'
 import { showToast } from '../utils/ComponentUtils'
+import { InputBean } from '../bean/InputBean'
 
 
 @Entry
@@ -18,6 +19,9 @@ struct LoginPage{
   @State  checkBoolean:boolean=true
   @State  res :string=""
 
+
+  @State userNameError:string=""
+  @State passwordError:string=""
 
   build() {
     Column() {
@@ -48,21 +52,24 @@ struct LoginPage{
         .width(`100%`)
         .textAlign(TextAlign.Start)
 
-      Row(){
-        TextInput({placeholder:"account",text:this.account})
-          .showUnderline(true)
-          .underlineColor('#17C3CE')
-          .onChange((text)=>{
-            this.account=text
-          })
-        Image($r("app.media.account"))
-          .width(24)
-          .height(24)
-          .margin({
-            left:-26
-          })
-      }
-      .width(`100%`)
+
+      TextInput({placeholder:"account",text:this.account})
+        .backgroundColor(Color.Transparent)
+        .placeholderColor($r("app.color.content_Color"))
+        .type(InputType.USER_NAME)
+        .showError(this.userNameError)
+        .border({
+          width:{bottom:1},
+          color:'#17C3CE',
+          radius:0
+        })
+        .padding({
+          left:-2
+        })
+        .onChange((text)=>{
+          this.account=text
+        })
+        .width(`100%`)
 
       Text('密码')
         .fontSize(18)
@@ -74,21 +81,25 @@ struct LoginPage{
         .width(`100%`)
         .textAlign(TextAlign.Start)
 
-      Row(){
-        TextInput({placeholder:"password",text:this.password})
-          .showUnderline(true)
-          .underlineColor('#17C3CE')
-          .onChange((text)=>{
-           this.password=text
-          })
-        Image($r("app.media.Eye_light"))
-          .width(24)
-          .height(24)
-          .margin({
-            left:-26
-          })
-      }
-      .width(`100%`)
+
+      TextInput({placeholder:"password",text:this.password})
+        .type(InputType.Password)
+        .showError(this.passwordError)
+        .placeholderColor($r("app.color.content_Color"))
+        .backgroundColor(Color.Transparent)
+        .padding({
+          left:-2
+        })
+        .border({
+          width:{bottom:1},
+          color:'#17C3CE',
+          radius:0
+        })
+        .passwordIcon({onIconSrc:$r("app.media.eye_light_click"),offIconSrc:$r("app.media.eye_light")})
+        .onChange((text)=>{
+          this.password=text
+        })
+        .width(`100%`)
 
       Row(){
         Checkbox()
@@ -113,6 +124,15 @@ struct LoginPage{
         })
         .width(`90%`)
         .onClick(()=>{
+
+          if(this.account==""){
+            this.userNameError=InputBean.userNameNoNull
+          }
+
+          if(this.password==""){
+            this.passwordError=InputBean.passWordNoNull
+          }
+
           if(this.checkBoolean){
             loginViewModel.Login(this.account,this.password,(isSuccess)=>{
               if(isSuccess){
@@ -156,4 +176,6 @@ struct LoginPage{
     })
 
   }
+
+
 }

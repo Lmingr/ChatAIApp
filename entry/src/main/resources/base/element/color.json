@@ -27,6 +27,10 @@
     {
       "name": "message_Color",
       "value": "#F5F5F5"
+    },
+    {
+      "name": "dialog_Color",
+      "value": "#FF6E6E6E"
     }
   ]
 }

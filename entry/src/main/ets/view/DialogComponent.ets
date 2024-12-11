@@ -4,7 +4,6 @@ import { promptAction } from "@kit.ArkUI";
 @Component
 export struct  DialogComponent{
 
-  @Prop message: string = '';
 
   build() {
     Column() {
@@ -17,7 +16,7 @@ export struct  DialogComponent{
       .height(56)
       .justifyContent(FlexAlign.Center)
 
-      Text(this.message)
+      Text("this.message")
         .fontSize(14)
 
       Row(){
@@ -27,27 +26,29 @@ export struct  DialogComponent{
           .backgroundColor(Color.White)
           .onClick(() => {
           })
-          .width('100%')
           .margin({
             top: 8,
             bottom: 16
           })
-
         Button('取消')
           .fontSize(16)
           .fontColor('#0A59F7')
           .backgroundColor(Color.White)
           .onClick(() => {
           })
-          .width('100%')
           .margin({
             top: 8,
             bottom: 16
           })
       }
+      .border({
+        width:1,
+        color:Color.Red
+      })
       .justifyContent(FlexAlign.SpaceBetween)
 
     }
+    .width(`60%`)
     .padding({
       left: 24,
       right: 24

@@ -91,7 +91,7 @@ struct  RegisterPage{
           .onChange((text)=>{
             this.password=text
           })
-        Image($r("app.media.Eye_light"))
+        Image($r("app.media.eye_light"))
           .width(24)
           .height(24)
           .margin({
