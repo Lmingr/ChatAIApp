@@ -8,6 +8,7 @@ import { http } from '@kit.NetworkKit'
 import { loginViewModel } from '../viewModel/LoginViewModel'
 import { showToast } from '../utils/ComponentUtils'
 import { InputBean } from '../bean/InputBean'
+import { PreferencesUtil } from '../utils/PreferencesUtil'
 
 
 @Entry
@@ -19,6 +20,7 @@ struct LoginPage{
   @State  checkBoolean:boolean=true
   @State  res :string=""
 
+  statusBar: number = AppStorage.get<number>('statusBar') as number
 
   @State userNameError:string=""
   @State passwordError:string=""
@@ -109,6 +111,9 @@ struct LoginPage{
           .width(16)
           .height(16)
           .select(true)
+          .onChange((value:boolean)=>{
+           this.checkBoolean=value
+          })
         Text(`记住账号`)
           .fontSize(14)
       }
@@ -132,20 +137,22 @@ struct LoginPage{
           if(this.password==""){
             this.passwordError=InputBean.passWordNoNull
           }
-
           if(this.checkBoolean){
-            loginViewModel.Login(this.account,this.password,(isSuccess)=>{
-              if(isSuccess){
-                showToast("登录成功")
-                AppStorage.setOrCreate('username', this.account)
-                router.pushUrl({url:'pages/MainPage'})
-              }else{
-                showToast("登录失败")
-              }
-            })
+            PreferencesUtil.putValue("username",this.account)
+            PreferencesUtil.putValue("password",this.account)
           }else{
             showToast("请先勾选协议")
           }
+
+          loginViewModel.Login(this.account,this.password,(isSuccess)=>{
+            if(isSuccess){
+              showToast("登录成功")
+              AppStorage.setOrCreate('username', this.account)
+              router.pushUrl({url:'pages/MainPage'})
+            }else{
+              showToast("登录失败")
+            }
+          })
         })
 
       Text(){
@@ -167,6 +174,9 @@ struct LoginPage{
       })
 
     }
+    .margin({
+      top:this.statusBar
+    })
     .width('100%')
     .height('100%')
     .padding({

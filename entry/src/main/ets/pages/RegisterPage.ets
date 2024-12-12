@@ -9,6 +9,7 @@ struct  RegisterPage{
 
   @State   account: string=""
   @State   password: string=""
+  statusBar: number = AppStorage.get<number>('statusBar') as number
 
   build() {
     Column(){
@@ -49,6 +50,9 @@ struct  RegisterPage{
 
       Blank()
     }
+    .margin({
+      top:this.statusBar
+    })
     .padding({left:20,right:20})
     .justifyContent(FlexAlign.Start)
     .width(`100%`)

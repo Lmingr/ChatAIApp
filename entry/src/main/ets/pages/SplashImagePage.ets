@@ -1,7 +1,0 @@
-
-@Component
-struct  SplashImagePage{
-
-  build() {
-  }
-}
