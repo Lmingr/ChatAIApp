@@ -11,7 +11,6 @@ import { BaseViewModel } from "./BaseViewModel";
 export class  ChatMessageViewModel extends  BaseViewModel{
 
 
-
   userMessage:UserMessage=new UserMessage()
 
 

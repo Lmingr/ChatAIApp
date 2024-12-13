@@ -48,7 +48,7 @@ struct  MessageComponent{
 
   build() {
     Row(){
-      Image(this.isOwnMessage?$r("app.media.touxiang_1"):$r("app.media.vector_ai"))
+      Image(this.isOwnMessage?$r("app.media.man_avter"):$r("app.media.vector_ai"))
         .width(33)
         .height(33)
         .objectFit(ImageFit.Contain)

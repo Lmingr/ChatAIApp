@@ -44,7 +44,7 @@ export  struct MinePage{
         .width(`100%`)
 
       Row(){
-        Image($r("app.media.touxiang_1"))
+        Image($r("app.media.avatar_man"))
           .width(70)
           .height(70)
           .border({
@@ -85,13 +85,7 @@ export  struct MinePage{
         left:20,
         right:20
       })
-
-
-
     }
-    .margin({
-      top:this.statusBar
-    })
     .height(`100%`)
     .width(`100%`)
   }

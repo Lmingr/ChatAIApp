@@ -162,11 +162,10 @@ struct  ChatToAIPage{
         let  userMessage=new UserMessage()
          userMessage.username=this.username
          userMessage.messageTopic=  this.messageList[1].content
-         Logger.info("messageContent"+this.messageList[2].content.substring(0,40))
          userMessage.messageContent= this.messageList[2].content.substring(0,40)
          userMessage.messageList=this.messageList
          chatMessageViewModel.insertMessage(userMessage)
-         showToast("新建成功啦")
+         showToast("新建成功")
     }
     else if(this.isSendMessage){
       //在页面消息的时候做更新操作,这里是修改
@@ -175,10 +174,9 @@ struct  ChatToAIPage{
       messageUpdateBean.messageList=this.messageList
       chatMessageViewModel.updateMessage(messageUpdateBean)
       showToast("修改成功")
-      Logger.info(" aboutToDisappear()这里是页面不显示的时候")
     }
    else{
-     showToast("啥都没变过啦")
+     Logger.info("修改失败，没有任何改动")
    }
   }
 

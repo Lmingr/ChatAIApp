@@ -15,8 +15,8 @@ import { PreferencesUtil } from '../utils/PreferencesUtil'
 @Component
 struct LoginPage{
 
-  @State  account: string="luomingr"
-  @State  password: string="1231231"
+  @State  account: string=""
+  @State  password: string=""
   @State  checkBoolean:boolean=true
   @State  res :string=""
 
@@ -24,6 +24,14 @@ struct LoginPage{
 
   @State userNameError:string=""
   @State passwordError:string=""
+
+  aboutToAppear(): void {
+    if(PreferencesUtil.getPreference()){
+      this.account=PreferencesUtil.getValue("username").toString()
+      this.password=PreferencesUtil.getValue("password").toString()
+    }
+  }
+
 
   build() {
     Column() {
@@ -58,6 +66,7 @@ struct LoginPage{
       TextInput({placeholder:"account",text:this.account})
         .backgroundColor(Color.Transparent)
         .placeholderColor($r("app.color.content_Color"))
+        .maxLength(12)
         .type(InputType.USER_NAME)
         .showError(this.userNameError)
         .border({
@@ -86,6 +95,7 @@ struct LoginPage{
 
       TextInput({placeholder:"password",text:this.password})
         .type(InputType.Password)
+        .maxLength(10)
         .showError(this.passwordError)
         .placeholderColor($r("app.color.content_Color"))
         .backgroundColor(Color.Transparent)
@@ -137,16 +147,13 @@ struct LoginPage{
           if(this.password==""){
             this.passwordError=InputBean.passWordNoNull
           }
-          if(this.checkBoolean){
-            PreferencesUtil.putValue("username",this.account)
-            PreferencesUtil.putValue("password",this.account)
-          }else{
-            showToast("请先勾选协议")
-          }
-
           loginViewModel.Login(this.account,this.password,(isSuccess)=>{
             if(isSuccess){
               showToast("登录成功")
+              if(this.checkBoolean){
+                PreferencesUtil.putValue("username",this.account)
+                PreferencesUtil.putValue("password",this.password)
+              }
               AppStorage.setOrCreate('username', this.account)
               router.pushUrl({url:'pages/MainPage'})
             }else{
