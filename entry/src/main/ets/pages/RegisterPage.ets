@@ -9,6 +9,9 @@ struct  RegisterPage{
 
   @State   account: string=""
   @State   password: string=""
+
+  @State checkBool:boolean=false
+
   statusBar: number = AppStorage.get<number>('statusBar') as number
 
   build() {
@@ -68,6 +71,7 @@ struct  RegisterPage{
           .width(`100%`)
       Row(){
         TextInput({placeholder:"account",text:this.account})
+          .placeholderColor($r("app.color.content_Color"))
           .showUnderline(true)
           .underlineColor('#17C3CE')
           .onChange((text)=>{
@@ -90,6 +94,7 @@ struct  RegisterPage{
         .margin({top:10})
       Row(){
         TextInput({placeholder:"password",text:this.password})
+          .placeholderColor($r("app.color.content_Color"))
           .showUnderline(true)
           .underlineColor('#17C3CE')
           .onChange((text)=>{
@@ -111,12 +116,23 @@ struct  RegisterPage{
           .shape(CheckBoxShape.ROUNDED_SQUARE)
           .width(16)
           .height(16)
-          .select(true)
-        Text(`我同意app的相关隐私政策和隐私协议`)
-          .width('80%')
-          .fontSize(14)
-          .fontWeight(FontWeight.Bold)
-          .fontSize(14)
+          .select(this.checkBool)
+          .onChange((value)=>{
+            this.checkBool=value
+          })
+
+
+        Text(){
+          Span('我已阅读并同意')
+            .fontSize(14)
+            .fontColor(Color.Black)
+          Span('《隐私政策》')
+            .fontSize(14)
+            .fontColor($r("app.color.primaryColor"))
+            .onClick(()=>{
+              router.pushUrl({url:'pages/WebPage'})
+            })
+        }
       }
       .margin({
         top:30
@@ -131,12 +147,18 @@ struct  RegisterPage{
         .backgroundColor('#17C3CE')
         .onClick(()=>{
           registerViewModel.register(this.account,this.password,(isSuccess)=>{
-            if(isSuccess){
-              showToast('注册成功！跳转导登录页')
-              router.back({url:'pages/LoginPage'})
+
+            if(this.checkBool){
+              if(isSuccess){
+                showToast('注册成功！跳转导登录页')
+                router.back({url:'pages/LoginPage'})
+              }else{
+                showToast('注册失败！')
+              }
             }else{
-              showToast('注册失败！')
+              showToast('请选阅读并勾选同意隐私政策')
             }
+
           })
         })
     }

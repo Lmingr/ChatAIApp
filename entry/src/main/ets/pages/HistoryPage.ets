@@ -28,7 +28,6 @@ export  struct HistoryPage{
   }
 
 
-
   async  deleteMessage(mid:number){
     Logger.info("删除"+mid)
     historyViewModel.deleteMessage(mid).then(()=>{

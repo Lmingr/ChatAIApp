@@ -6,6 +6,7 @@
     "pages/ChatToAIPage",
     "pages/RegisterPage",
     "pages/HistoryPage",
-    "pages/SplashPage"
+    "pages/SplashPage",
+    "pages/WebPage"
   ]
 }

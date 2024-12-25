@@ -85,8 +85,6 @@ export class PreferencesUtil {
     });
   }
 
-
-
 }
 
 export default PreferencesUtil;
