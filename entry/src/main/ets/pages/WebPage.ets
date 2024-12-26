@@ -3,6 +3,7 @@ import { router } from '@kit.ArkUI'
 import web_webview from '@ohos.web.webview';
 import { call } from '@kit.TelephonyKit';
 import { common, Want } from '@kit.AbilityKit';
+import { ErrorPage } from './ErrorPage';
 
 /**
  * @see RouterPath.WebPage
@@ -66,6 +67,11 @@ struct WebPage {
       .padding({left:20})
       .justifyContent(FlexAlign.Start)
       .width(`100%`)
+
+      if (this.error_net < 0) {
+        //因为ErrorPage不常出现,所以用if节约内存
+        ErrorPage({ onRefresh: this.onRefresh })
+      }
 
       Web({
         src: this.url,

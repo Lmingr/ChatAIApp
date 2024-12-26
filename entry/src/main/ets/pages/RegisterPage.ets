@@ -1,4 +1,5 @@
 import { router } from '@kit.ArkUI'
+import { InputBean } from '../bean/InputBean'
 import { showToast } from '../utils/ComponentUtils'
 import { registerViewModel } from '../viewModel/RegisterViewModel'
 
@@ -13,6 +14,9 @@ struct  RegisterPage{
   @State checkBool:boolean=false
 
   statusBar: number = AppStorage.get<number>('statusBar') as number
+
+  @State userNameError:string=""
+  @State passwordError:string=""
 
   build() {
     Column(){
@@ -64,50 +68,65 @@ struct  RegisterPage{
 
   @Builder LoginView(){
     Column(){
-        Text('账号')
-          .fontSize(14)
-          .fontWeight(FontWeight.Bold)
-          .fontColor(Color.Black)
-          .width(`100%`)
-      Row(){
-        TextInput({placeholder:"account",text:this.account})
-          .placeholderColor($r("app.color.content_Color"))
-          .showUnderline(true)
-          .underlineColor('#17C3CE')
-          .onChange((text)=>{
-            this.account=text
-          })
-        Image($r("app.media.account"))
-          .width(24)
-          .height(24)
-          .margin({
-            left:-26
-          })
-      }
-      .width(`100%`)
-
-      Text('密码')
-        .fontSize(14)
+      Text('账号')
+        .margin({
+          top:'30%'
+        })
+        .fontSize(18)
         .fontWeight(FontWeight.Bold)
         .fontColor(Color.Black)
         .width(`100%`)
-        .margin({top:10})
-      Row(){
-        TextInput({placeholder:"password",text:this.password})
-          .placeholderColor($r("app.color.content_Color"))
-          .showUnderline(true)
-          .underlineColor('#17C3CE')
-          .onChange((text)=>{
-            this.password=text
-          })
-        Image($r("app.media.eye_light"))
-          .width(24)
-          .height(24)
-          .margin({
-            left:-26
-          })
-      }
-      .width(`100%`)
+        .textAlign(TextAlign.Start)
+
+      TextInput({placeholder:"account",text:this.account})
+        .backgroundColor(Color.Transparent)
+        .placeholderColor($r("app.color.content_Color"))
+        .maxLength(12)
+        .type(InputType.USER_NAME)
+        .showError(this.userNameError)
+        .border({
+          width:{bottom:1},
+          color:'#17C3CE',
+          radius:0
+        })
+        .padding({
+          left:-2
+        })
+        .onChange((text)=>{
+          this.account=text
+        })
+        .width(`100%`)
+
+      Text('密码')
+        .fontSize(18)
+        .fontWeight(FontWeight.Bold)
+        .fontColor(Color.Black)
+        .margin({
+          top:20
+        })
+        .width(`100%`)
+        .textAlign(TextAlign.Start)
+
+
+      TextInput({placeholder:"password",text:this.password})
+        .type(InputType.Password)
+        .maxLength(10)
+        .showError(this.passwordError)
+        .placeholderColor($r("app.color.content_Color"))
+        .backgroundColor(Color.Transparent)
+        .padding({
+          left:-2
+        })
+        .border({
+          width:{bottom:1},
+          color:'#17C3CE',
+          radius:0
+        })
+        .passwordIcon({onIconSrc:$r("app.media.eye_light_click"),offIconSrc:$r("app.media.eye_light")})
+        .onChange((text)=>{
+          this.password=text
+        })
+        .width(`100%`)
 
       Row(){
         Checkbox()
@@ -149,6 +168,15 @@ struct  RegisterPage{
           registerViewModel.register(this.account,this.password,(isSuccess)=>{
 
             if(this.checkBool){
+
+              if(this.account==""){
+                this.userNameError=InputBean.userNameNoNull
+              }
+
+              if(this.password==""){
+                this.passwordError=InputBean.passWordNoNull
+              }
+
               if(isSuccess){
                 showToast('注册成功！跳转导登录页')
                 router.back({url:'pages/LoginPage'})
@@ -156,23 +184,14 @@ struct  RegisterPage{
                 showToast('注册失败！')
               }
             }else{
-              showToast('请选阅读并勾选同意隐私政策')
+              showToast('请先阅读并勾选同意隐私政策')
             }
 
           })
         })
     }
-    .margin({top:'30%'})
+    .margin({top:'10%'})
     .justifyContent(FlexAlign.Start)
     .width('100%')
   }
-}
-
-@Extend(TextInput) function textInputStyle() {
-  .height(40)
-  .backgroundColor(Color.Transparent)
-  .borderWidth({ bottom:1,top:0,left:0,right:0})
-  .borderRadius(0)
-  .width(`80%`)
-
 }

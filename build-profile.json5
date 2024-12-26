@@ -5,13 +5,13 @@
         "name": "default",
         "type": "HarmonyOS",
         "material": {
-          "certpath": "C:\\Users\\Administrator\\.ohos\\config\\default_ChatAIApp_imUMfL1Z6kM08nBpcQrCG7v7eSbulU9GjRjULmRgD3A=.cer",
-          "storePassword": "0000001B2ABA0C2F0732FDA08890CFFDCA4E0408F8F0BFC011D0B277E58A1305596F73640E1D61A6A4BD65",
-          "keyAlias": "debugKey",
-          "keyPassword": "0000001BA6B15E4AC88ED68F62B7338B256048A7ECE94590ABAAD7449D0EF60BA318844F4FA164702AA320",
-          "profile": "C:\\Users\\Administrator\\.ohos\\config\\default_ChatAIApp_imUMfL1Z6kM08nBpcQrCG7v7eSbulU9GjRjULmRgD3A=.p7b",
+          "storePassword": "0000001C05A5EAD1BEEC9CE82107ED723D29B73B202F303157A4D3FB38342C9628D611D1E5CB3294B3EF9C18",
+          "certpath": "AppScope/key/auto_debug1.cer",
+          "keyAlias": "MyChatAl",
+          "keyPassword": "0000001854D254CE54FFC24C7AA80F3B4E19613EFF8C3E9EC0248450E0A60A2DAFE8A40C237438A3",
+          "profile": "AppScope/key/chatAIDebug.p7b",
           "signAlg": "SHA256withECDSA",
-          "storeFile": "C:\\Users\\Administrator\\.ohos\\config\\default_ChatAIApp_imUMfL1Z6kM08nBpcQrCG7v7eSbulU9GjRjULmRgD3A=.p12"
+          "storeFile": "AppScope/key/ChatAiCat.p12"
         }
       }
     ],
