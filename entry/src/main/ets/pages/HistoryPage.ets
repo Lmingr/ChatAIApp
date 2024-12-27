@@ -33,6 +33,7 @@ export  struct HistoryPage{
     historyViewModel.deleteMessage(mid).then(()=>{
       showToast("删除成功")
     })
+
   }
 
 
@@ -101,7 +102,6 @@ export  struct HistoryPage{
           })
           .onClick(()=>{
             router.pushUrl({url:'pages/ChatToAIPage',params:{mid:item.mid,isNewChat:false}})
-            showToast("点击了"+item.mid)
           })
         })
       }

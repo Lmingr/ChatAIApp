@@ -27,7 +27,7 @@ struct  SplashPage{
           })
           .fontColor($r("app.color.primaryColor"))
       }
-      Text('本款app主要用于记录猫咪日常生活，用户交流平台')
+      Text('本款app主要用于AI日常问答，解决生活中的困惑')
         .fontSize(14)
         .fontColor($r("app.color.start_window_background"))
         .align(Alignment.Bottom)

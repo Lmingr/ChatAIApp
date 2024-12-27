@@ -5,10 +5,23 @@
         "name": "default",
         "type": "HarmonyOS",
         "material": {
-          "storePassword": "0000001C05A5EAD1BEEC9CE82107ED723D29B73B202F303157A4D3FB38342C9628D611D1E5CB3294B3EF9C18",
+          "certpath": "AppScope/key/chat_release.cer",
+          "storePassword": "0000001C6E9601D9493B70009440095DEA5B193FFAB41122E351F0FD664311ADBB783C1F1ABFC132DCB0A8A0",
+          "keyAlias": "MyChatAI",
+          "keyPassword": "0000001C9B84C4C6CA9E162C4402CF3DCF9DC20E2CEF4DAF1D346D0F1175D6A43C8D48791E55677171A38273",
+          "profile": "AppScope/key/chatAI_releaseRelease.p7b",
+          "signAlg": "SHA256withECDSA",
+          "storeFile": "AppScope/key/ChatAiCat.p12"
+        }
+      },
+      {
+        "name": "debug",
+        "type": "HarmonyOS",
+        "material": {
+          "storePassword": "0000001C47ED9BE32A5CB29D1A41323E3733EDFD156FF7AF2D1BC42B3B916F658C41A70F51995DCC85FA2006",
           "certpath": "AppScope/key/auto_debug1.cer",
           "keyAlias": "MyChatAl",
-          "keyPassword": "0000001854D254CE54FFC24C7AA80F3B4E19613EFF8C3E9EC0248450E0A60A2DAFE8A40C237438A3",
+          "keyPassword": "0000001CC0457414B35F41FF831ACBE91826F8DB911F40A45E458DC1F7885D0E984B18093956569A77CE6C81",
           "profile": "AppScope/key/chatAIDebug.p7b",
           "signAlg": "SHA256withECDSA",
           "storeFile": "AppScope/key/ChatAiCat.p12"
